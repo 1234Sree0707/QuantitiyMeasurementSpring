@@ -169,19 +169,7 @@ Follow standard Java coding conventions:
 - Add comments for complex logic
 - Keep methods focused and single-responsibility
 
-SUPPORT
 
-For issues, questions, or suggestions, please contact the development team or open an issue in the project repository.
-
-LICENSE
-
-This project is licensed under the MIT License. See LICENSE file for details.
-
-VERSION
-
-Current Version: 1.0.0
-
-CHANGELOG
 
 Version 1.0.0 (Initial Release)
 - Initial project setup
