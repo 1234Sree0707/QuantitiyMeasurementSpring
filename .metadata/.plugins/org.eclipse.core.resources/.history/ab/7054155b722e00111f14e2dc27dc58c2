@@ -1,0 +1,70 @@
+package com.example.quantitymeasurement.controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.example.quantitymeasurement.dto.QuantityInputDTO;
+import com.example.quantitymeasurement.dto.QuantityMeasurementDTO;
+import com.example.quantitymeasurement.service.IQuantityMeasurementService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/quantities")
+public class QuantityMeasurementController {
+	private static final Logger logger = LoggerFactory.getLogger(QuantityMeasurementController.class);
+
+
+    @Autowired
+    private IQuantityMeasurementService service;
+
+    @PostMapping("/add")
+    public QuantityMeasurementDTO add(@Valid @RequestBody QuantityInputDTO input) {
+    	 logger.info("ADD endpoint called");
+
+    	 logger.debug("Input received: {}", input);
+
+    	  QuantityMeasurementDTO response = service.add(input);
+
+    	  logger.info("ADD operation completed successfully");
+
+    	  return response;
+    }
+
+    @PostMapping("/subtract")
+    public QuantityMeasurementDTO subtract(@Valid @RequestBody QuantityInputDTO input) {
+        return service.subtract(input);
+    }
+
+    @PostMapping("/divide")
+    public QuantityMeasurementDTO divide(@Valid @RequestBody QuantityInputDTO input) {
+        return service.divide(input);
+    }
+
+    @PostMapping("/compare")
+    public QuantityMeasurementDTO compare(@Valid @RequestBody QuantityInputDTO input) {
+        return service.compare(input);
+    }
+
+    @PostMapping("/convert")
+    public QuantityMeasurementDTO convert(@Valid @RequestBody QuantityInputDTO input) {
+        return service.convert(input);
+    }
+
+    @GetMapping("/history/action/{action}")
+    public List<QuantityMeasurementDTO> getByAction(@PathVariable String action) {
+        return service.getByAction(action);
+    }
+
+    @GetMapping("/history/type/{type}")
+    public List<QuantityMeasurementDTO> getByType(@PathVariable String type) {
+        return service.getByType(type);
+    }
+
+    @GetMapping("/count/{action}")
+    public long getCount(@PathVariable String action) {
+        return service.getCount(action);
+    }
+}

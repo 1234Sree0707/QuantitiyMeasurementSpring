@@ -1,5 +1,6 @@
 package com.example.quantitymeasurement.controller;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.example.quantitymeasurement.dto.QuantityInputDTO;
 import com.example.quantitymeasurement.dto.QuantityMeasurementDTO;
@@ -9,17 +10,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@CrossOrigin(origins = "http://localhost:3000")
 
 @RestController
 @RequestMapping("/api/quantities")
 public class QuantityMeasurementController {
+	private static final Logger logger = LoggerFactory.getLogger(QuantityMeasurementController.class);
+
 
     @Autowired
     private IQuantityMeasurementService service;
 
     @PostMapping("/add")
     public QuantityMeasurementDTO add(@Valid @RequestBody QuantityInputDTO input) {
-        return service.add(input);
+    	 logger.info("ADD endpoint called");
+
+    	 logger.debug("Input received: {}", input);
+
+    	  QuantityMeasurementDTO response = service.add(input);
+
+    	  logger.info("ADD operation completed successfully");
+
+    	  return response;
     }
 
     @PostMapping("/subtract")

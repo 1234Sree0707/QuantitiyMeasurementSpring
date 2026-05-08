@@ -14,6 +14,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class QuantityDTO {
+	public QuantityDTO(
+	        Double value,
+	        String symbol,
+	        String label,
+	        String type
+	) {
+	    this.value = value;
+	    this.symbol = symbol;
+	    this.label = label;
+	    this.type = type;
+	}
 
     @NotNull(message = "Value cannot be null")
     private Double value;
